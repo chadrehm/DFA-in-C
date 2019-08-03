@@ -42,6 +42,7 @@ void buildStates (AUTO* autoPtr, char line[]);
 void buildFinalStates (AUTO* autoPtr, char line[]);
 void buildState(AUTO* autoPtr, char line[]);
 void buildTransitions(AUTO* autoPtr, char line[]);
+void addTransitionNode (TRANSITION_LIST *list, TRANSITION *tran);
 int countTransitions(char line[]);
 void readFile (AUTO *autoPtr, char filename[FILE_NAME]);
 
@@ -223,7 +224,6 @@ void buildTransitions (AUTO* autoPtr, char line[]) {
 	
 	if (!trans) { /* validate all memory allocations */
         printf ("error: virtual memory exhausted.\n");
-        return 1;
     }
 	
 	int tranElm = 0;
@@ -269,7 +269,7 @@ void buildTransitions (AUTO* autoPtr, char line[]) {
 			}
 			i++;
 		} 
-		addTransitionNode(autoPtr->transList, trans[tranElm]);
+		addTransitionNode(autoPtr->transList, &trans[tranElm]);
 		
 		i++;
 		tranElm++;
